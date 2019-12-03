@@ -22,7 +22,7 @@ var server = net.createServer(function(connection) {
     connection.pipe(connection);
 });
 
-server.listen(8080, function() {
+server.listen(3001, function() {
     console.log("server is listening");
 });
 //net end
