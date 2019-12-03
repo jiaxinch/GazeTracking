@@ -28,9 +28,9 @@ server.listen(8080, function() {
 //net end
 
 //socket io
-app.get("/", function(req, res) {
-    res.sendFile(__dirname + "/index.html");
-});
+// app.get("/", function(req, res) {
+//     res.sendFile(__dirname + "/index.html");
+// });
 
 io.on("connection", function(socket) {
     console.log("a socket io user connected");
