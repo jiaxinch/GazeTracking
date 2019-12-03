@@ -20,7 +20,7 @@ Open up Tobii.CoreSDK.Samples.sln at /samples\
 Run program in Interaction_Streams_101\
 You can now see the coordinate at Visual Studio terminal and node.js server terminal \
 
-3. Go to localhost:3000 at you browser \
+3. Open index.html \
 Now you should see the coordinate shown at console of browser! \
 
 Feel free to edit server.js and index.html to implmenent more feature. 
