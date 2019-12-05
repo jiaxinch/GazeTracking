@@ -3,6 +3,11 @@
 	var socket = io('http://34.70.168.249:3000');
     socket.on('data', function (data) {
       console.log(data);
+	  var res = data.split(" ");
+	  var x=parseFloat(res[1]);
+	  var y=parseFloat(res[2]);
+	  console.log(x);
+	  console.log(y);
     });
     socket.on('connect', () => {
     console.log("connected"); // true

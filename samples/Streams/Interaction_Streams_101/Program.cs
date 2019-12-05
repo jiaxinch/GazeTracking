@@ -24,6 +24,12 @@ namespace interaction_streams_101
             Int32 port = 3001;
             TcpClient client = new TcpClient(server, port);
             NetworkStream stream = client.GetStream();
+
+            //String temp = String.Format("{0} {1} {2}", "aaaa", 100.1, 200.1);
+           // Byte[] dataT = System.Text.Encoding.ASCII.GetBytes(temp);
+           //stream.Write(dataT, 0, dataT.Length);
+
+
             // Everything starts with initializing Host, which manages connection to the 
             // Tobii Engine and provides all the Tobii Core SDK functionality.
             // NOTE: Make sure that Tobii.EyeX.exe is running
