@@ -20,8 +20,8 @@ namespace interaction_streams_101
     {
         public static void Main(string[] args)
         {
-            String server = "localhost";
-            Int32 port = 8080;
+            String server = "34.70.168.249";
+            Int32 port = 3001;
             TcpClient client = new TcpClient(server, port);
             NetworkStream stream = client.GetStream();
             // Everything starts with initializing Host, which manages connection to the 
@@ -34,7 +34,7 @@ namespace interaction_streams_101
 
             // 3. Get the gaze data!
             gazePointDataStream.GazePoint((x, y, ts) => {
-                String message = String.Format("Timestamp: {0}\t X: {1} Y:{2}", ts, x, y);
+                String message = String.Format("{0} {1} {2}", ts, x, y);
                 Console.WriteLine(message);
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
                 stream.Write(data, 0, data.Length);

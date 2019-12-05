@@ -37,6 +37,11 @@ io.on("connection", function(socket) {
     //io.emit("data", "a gaze cooridiate");
 });
 
+io.on("disconnected", function(socket) {
+    console.log("a socket io user disconnected");
+    //io.emit("data", "a gaze cooridiate");
+});
+
 http.listen(3000, function() {
     console.log("listening on *:3000");
 });
