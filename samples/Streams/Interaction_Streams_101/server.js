@@ -17,6 +17,10 @@ var server = net.createServer(function(connection) {
         io.emit("data", data.toString());
     });
 
+    connection.on("error", err => {
+        console.error(err);
+    });
+
     connection.write("Hello World!\r\n");
     //io.emit('data', "another gaze cooridiate")
     connection.pipe(connection);

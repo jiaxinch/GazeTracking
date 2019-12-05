@@ -31,7 +31,7 @@ namespace interaction_streams_101
 
             // 2. Create stream. 
             var gazePointDataStream = host.Streams.CreateGazePointDataStream();
-
+            
             // 3. Get the gaze data!
             gazePointDataStream.GazePoint((x, y, ts) => {
                 String message = String.Format("{0} {1} {2}", ts, x, y);
@@ -40,11 +40,16 @@ namespace interaction_streams_101
                 stream.Write(data, 0, data.Length);
             });
 
+            
             // okay, it is 4 lines, but you won't be able to see much without this one :)
             Console.ReadKey();
+            client.Close();
 
-            // we will close the coonection to the Tobii Engine before exit.
-            host.DisableConnection();
+
+            // we will close the coonection to the Tobii Engine before exit.
+            host.DisableConnection();
+           
+
         }
     }
 }
