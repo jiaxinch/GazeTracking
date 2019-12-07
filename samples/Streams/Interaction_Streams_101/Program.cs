@@ -37,10 +37,13 @@ namespace interaction_streams_101
 
             // 2. Create stream. 
             var gazePointDataStream = host.Streams.CreateGazePointDataStream();
+
+            //put your user id shown in the browser
+            var uid = 0;
             
             // 3. Get the gaze data!
             gazePointDataStream.GazePoint((x, y, ts) => {
-                String message = String.Format("{0} {1} {2}", ts, x, y);
+                String message = String.Format("{0} {1} {2}", uid, x, y);
                 Console.WriteLine(message);
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
                 stream.Write(data, 0, data.Length);
