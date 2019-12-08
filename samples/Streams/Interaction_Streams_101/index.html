@@ -1,14 +1,29 @@
+<style>
+html, body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<div id="box" style="background-color:red;width:10px;height:10px;position:fixed;"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
 <script>
 	var socket = io('http://34.70.168.249:3000');
     socket.on('data', function (data) {
       console.log(data);
-	  var res = data.split(" ");
-	  var id=parseInt(res[0]);
-	  var x=parseFloat(res[1]);
-	  var y=parseFloat(res[2]);
-	  console.log(x);
-	  console.log(y);
+	  var array=data.split("\n");
+	  for (index = 0; index < array.length-1; index++){
+		  var res = array[index].split(" ");
+		  var id=parseInt(res[0]);
+		  var x=parseFloat(res[1]);
+		  var y=parseFloat(res[2]);
+		  console.log(x);
+		  console.log(y);
+		  document.querySelector('#box').style.left = x-150 + 'px';
+		  document.querySelector('#box').style.top = y-150 + 'px';
+	  }
+
     });
     socket.on('connect', () => {
     console.log("connected"); // true

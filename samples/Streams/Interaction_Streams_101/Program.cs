@@ -25,10 +25,10 @@ namespace interaction_streams_101
             TcpClient client = new TcpClient(server, port);
             NetworkStream stream = client.GetStream();
 
-            //String temp = String.Format("{0} {1} {2}", "aaaa", 100.1, 200.1);
-           // Byte[] dataT = System.Text.Encoding.ASCII.GetBytes(temp);
+           //String temp = String.Format("{0} {1} {2}", "aaaa", 100.1, 200.1);
+           //Byte[] dataT = System.Text.Encoding.ASCII.GetBytes(temp);
            //stream.Write(dataT, 0, dataT.Length);
-
+           //Console.WriteLine(temp);
 
             // Everything starts with initializing Host, which manages connection to the 
             // Tobii Engine and provides all the Tobii Core SDK functionality.
@@ -40,19 +40,36 @@ namespace interaction_streams_101
 
             //put your user id shown in the browser
             var uid = 0;
-            
+
+            var count = 0;
+            var frequency = 10;
+
+
             // 3. Get the gaze data!
             gazePointDataStream.GazePoint((x, y, ts) => {
-                String message = String.Format("{0} {1} {2}", uid, x, y);
-                Console.WriteLine(message);
+                String message = String.Format("{0} {1} {2} \n",uid, x, y);
+                
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
-                stream.Write(data, 0, data.Length);
+                count = count + 1;
+                if (count == frequency) {
+                    stream.Write(data, 0, data.Length);
+                    //stream.Flush();
+                    count = 0;
+                    Console.WriteLine(message);
+                }
+
             });
 
             
             // okay, it is 4 lines, but you won't be able to see much without this one :)
             Console.ReadKey();
-            client.Close();
+            //client.Close();
+
+            String temp = String.Format("I am here socket");
+            Byte[] dataT = System.Text.Encoding.ASCII.GetBytes(temp);
+            NetworkStream stream1 = client.GetStream();
+            stream1.Write(dataT, 0, dataT.Length);
+            Console.WriteLine(temp);
 
 
             // we will close the coonection to the Tobii Engine before exit.
