@@ -6,9 +6,12 @@ html, body {
 </style>
 
 <div id="box" style="background-color:red;width:10px;height:10px;position:fixed;"></div>
-
+<button type="button" onclick="getResolution();">Get Resolution</button>
 <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
 <script>
+	function getResolution() {
+	alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+}
 	var socket = io('http://34.70.168.249:3000');
     socket.on('data', function (data) {
       console.log(data);
@@ -20,8 +23,12 @@ html, body {
 		  var y=parseFloat(res[2]);
 		  console.log(x);
 		  console.log(y);
-		  document.querySelector('#box').style.left = x-150 + 'px';
-		  document.querySelector('#box').style.top = y-150 + 'px';
+		  var real_width=1920;
+		  var real_height=1080;
+		  var convert_x=x/real_width*screen.width;
+		  var convert_y=y/real_height*screen.height;
+		  document.querySelector('#box').style.left = convert_x + 'px';
+		  document.querySelector('#box').style.top = convert_y + 'px';
 	  }
 
     });
