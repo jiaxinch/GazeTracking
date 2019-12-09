@@ -49,8 +49,8 @@ namespace interaction_streams_101
 
             var real_width = 1920;
             var real_height = 1080;
-            var screen_width = 1536;
-            var screen_height = 864;
+            var screen_width = 1920;
+            var screen_height = 1080;
 
             // 3. Get the gaze data!
             gazePointDataStream.GazePoint((x, y, ts) => {
