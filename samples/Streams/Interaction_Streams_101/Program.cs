@@ -16,14 +16,17 @@ namespace interaction_streams_101
     /// let's see how is simple to find out where are you looking at the screen
     /// using gazepoint data stream, accessible from streams property of host instance.
     /// </summary>
+    /// 
+
+
     public class program
     {
         public static void Main(string[] args)
         {
-            String server = "34.70.168.249";
-            Int32 port = 3001;
-            TcpClient client = new TcpClient(server, port);
-            NetworkStream stream = client.GetStream();
+           // String server = "34.70.168.249";
+            //Int32 port = 3001;
+            //TcpClient client = new TcpClient(server, port);
+            //NetworkStream stream = client.GetStream();
 
            //String temp = String.Format("{0} {1} {2}", "aaaa", 100.1, 200.1);
            //Byte[] dataT = System.Text.Encoding.ASCII.GetBytes(temp);
@@ -44,18 +47,26 @@ namespace interaction_streams_101
             var count = 0;
             var frequency = 10;
 
+            var real_width = 1920;
+            var real_height = 1080;
+            var screen_width = 1536;
+            var screen_height = 864;
 
             // 3. Get the gaze data!
             gazePointDataStream.GazePoint((x, y, ts) => {
-                String message = String.Format("{0} {1} {2} \n",uid, x, y);
-                
+             String message = String.Format("{0} {1} {2} \n",uid, x, y);
+             var convert_x = x / real_width * screen_width;
+             var convert_y = y / real_height * screen_height;
+                System.Windows.Forms.Cursor.Position = new System.Drawing.Point(Convert.ToInt32(convert_x), Convert.ToInt32(convert_y));
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
                 count = count + 1;
                 if (count == frequency) {
-                    stream.Write(data, 0, data.Length);
+                    //stream.Write(data, 0, data.Length);
                     //stream.Flush();
                     count = 0;
                     Console.WriteLine(message);
+
+
                 }
 
             });
@@ -65,11 +76,11 @@ namespace interaction_streams_101
             Console.ReadKey();
             //client.Close();
 
-            String temp = String.Format("I am here socket");
-            Byte[] dataT = System.Text.Encoding.ASCII.GetBytes(temp);
-            NetworkStream stream1 = client.GetStream();
-            stream1.Write(dataT, 0, dataT.Length);
-            Console.WriteLine(temp);
+            //String temp = String.Format("I am here socket");
+            //Byte[] dataT = System.Text.Encoding.ASCII.GetBytes(temp);
+           // NetworkStream stream1 = client.GetStream();
+            //stream1.Write(dataT, 0, dataT.Length);
+            ///Console.WriteLine(temp);
 
 
             // we will close the coonection to the Tobii Engine before exit.
